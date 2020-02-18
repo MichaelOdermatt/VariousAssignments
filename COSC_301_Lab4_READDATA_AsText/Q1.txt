@@ -1,0 +1,27 @@
+#lab4Q1 Michael Odermatt 68042530
+data = [1, 9, 13, 25, 42, 55, 59, 63, 68, 69, 70, 70, 70, 70, 72, 75,
+85, 99, 90, 85, 44, 23, 55, 66, 77]
+
+Lb = int(input())
+Ub = int(input())
+
+mx = 0;
+mn = data[Lb-1];
+sm = 0;
+cn = 0;
+avg = 0;
+
+x = 0
+for x in range(0,len(data)):
+    if data[x] >= Lb and data[x] <= Ub:
+        cn +=1
+        sm += data[x]
+        if data[x] > mx:
+            mx = data[x]
+        if data[x] < mn:
+            mn = data[x]
+
+print(data)
+print("max", mx)
+print("min", mn)
+print("avg", sm/cn)

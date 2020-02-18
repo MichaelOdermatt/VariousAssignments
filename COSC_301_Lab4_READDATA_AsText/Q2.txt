@@ -1,0 +1,59 @@
+import csv
+
+#Lab4q2 Michael Odermatt 68042530
+info = """2 Joe 95000 4 Steve
+35000 1 Samantha 150000 10 Leah 99000
+6 Riley 53215 7 Ashley 23424
+15 Sheyanne 225000 9 Dave 35235"""
+
+data = info.split()
+
+eno = []
+ename = []
+salary = []
+
+for x in range(0, len(data)):
+    if x%3 == 0:
+        eno.append(data[x])
+    if x%3 == 0:
+        ename.append(data[x+1])
+    if x%3 == 0:
+        salary.append(data[x+2])
+
+print("id's: ", eno)
+print("name's: ", ename)
+print("salary: ", salary)
+print()
+
+with open('data.csv', 'w', newline='') as csvfile:
+    output = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    for x in range(0,len(eno)):
+        output.writerow([eno[x], ename[x], salary[x]])
+
+print("CSV Output:")
+with open('data.csv', 'r') as csvfile:
+    reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+    for row in reader:
+        print(",".join(row))
+
+csv = [eno, ename, salary]
+
+print("\nList with each row a list: \n ", csv)
+
+import csv
+print("\nCSV Output Filtered:")
+with open('data.csv', 'r') as csvfile:
+    reader= csv.reader(csvfile, delimiter=' ', quotechar='|')
+    for row in reader:
+        if int(row[0])>=4 and int(row[0])<=8 or int(row[2])>50000:
+            print(",".join(row))
+
+sortedlist = []
+print("\nCSV Output Ordered by Acending id:")
+with open('data.csv', 'r') as csvfile:
+    reader= csv.reader(csvfile, delimiter=' ', quotechar='|')
+    for row in reader:
+        sortedlist.append(row)
+    sortedlist = sorted(sortedlist)
+    for row in sortedlist:
+        print(",".join(row))

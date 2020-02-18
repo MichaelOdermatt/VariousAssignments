@@ -1,0 +1,37 @@
+#Lab05 q1 Michael Odermatt 68042530
+from Bio.Blast import NCBIWWW
+from Bio.Blast import NCBIXML
+
+count = 1
+classification = []
+sizes = []
+
+with open(r"C:\Users\Micha\OneDrive\Desktop\UBCO2\COSC301\Assignmnet5\lab05input.txt", "r") as textfile:
+    for line in textfile:
+        seq = line
+        count+=1
+        print(line[0:20])
+        print(len(line)-1)
+        if line != "\n":
+            try:
+                with open("dna_lab5_" + str(count) +".xml", "r") as file2:
+                    print("Using saved file")
+            except:
+                print("performing online blast search.")
+                handle = NCBIWWW.qblast("blastn", "nt", seq)
+                result = handle.read()
+                with open("dna_lab5_" + str(count) +".xml", "w") as outfile:
+                    outfile.write(result)
+            with open("dna_lab5_" + str(count) +".xml", "w") as blast_infile
+                records = NCBIXML.parse(blast_infile)
+                records = next(records)
+                if "grape" in records:
+                    classification.append(1)
+                if "fruit fly" in records:
+                    classification.append(0)
+                sizes.append(records.alignments[0].length)
+print("Count", count)
+print("Classifications", classifications)
+print("Sizes", sizes)
+
+rects1 = plt.bar(count,classifications, alpha = 1, color = 'b', label = 'title')
